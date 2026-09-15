@@ -1,0 +1,84 @@
+$title-color: #1a2b49;
+$link-color: #1c2f9e;
+$link-hover-bg: #f0f2fa;
+$separator-color: #e3e3e3;
+
+.menuLateral {
+  font-family: "Segoe UI", sans-serif;
+  width: 100%;
+  max-width: 320px;
+}
+
+.bannerLink,
+.bannerImg {
+  display: block;
+  width: 100%;
+}
+
+.bannerImg {
+  margin-bottom: 16px;
+}
+
+.menuList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Título de categoría (ej: "Novedades", "Administración", "Exportar") */
+.parentItem {
+  margin-top: 20px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  a {
+    display: block;
+    padding: 6px 0;
+    color: $title-color;
+    font-size: 22px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
+
+/* Ítem de nivel superior sin hijos: se muestra como un link normal, no como título */
+.leafItem {
+  border-bottom: 1px solid $separator-color;
+
+  a {
+    display: block;
+    padding: 12px 0;
+    color: $link-color;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $link-hover-bg;
+    }
+  }
+}
+
+.childList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.childItem {
+  border-bottom: 1px solid $separator-color;
+
+  a {
+    display: block;
+    padding: 12px 0;
+    color: $link-color;
+    font-size: 16px;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $link-hover-bg;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "a63e774a-7964-47cc-8809-242ef0563a3f",
+  "alias": "MenuLateralWebPart",
+  "componentType": "WebPart",
+
+  "version": "*",
+  "manifestVersion": 2,
+
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+    "group": { "default": "Advanced" },
+    "title": { "default": "Menu Lateral" },
+    "description": { "default": "Menú lateral de navegación por categorías" },
+    "officeFabricIconFontName": "BulletedList2List",
+    "properties": {
+      "restrictedGroupId": "1440",
+      "restrictedSiteSegment": "GestionMedicamentos",
+      "restrictedLinkTitle": "Nuevo Pedido"
+    }
+  }]
+}

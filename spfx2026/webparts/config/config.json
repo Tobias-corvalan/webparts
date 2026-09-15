@@ -1,0 +1,55 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "hello-world-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/helloWorld/HelloWorldWebPart.js",
+          "manifest": "./src/webparts/helloWorld/HelloWorldWebPart.manifest.json"
+        }
+      ]
+    },
+    "faq-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/faq/FaqWebPart.js",
+          "manifest": "./src/webparts/faq/FaqWebPart.manifest.json"
+        }
+      ]
+    },
+    "navbar-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/navbar/NavbarWebPart.js",
+          "manifest": "./src/webparts/navbar/NavbarWebPart.manifest.json"
+        }
+      ]
+    },
+    "menu-lateral-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/menuLateral/MenuLateralWebPart.js",
+          "manifest": "./src/webparts/menuLateral/MenuLateralWebPart.manifest.json"
+        }
+      ]
+    },
+    "lista-novedades-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/listaNovedades/ListaNovedadesWebPart.js",
+          "manifest": "./src/webparts/listaNovedades/ListaNovedadesWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "HelloWorldWebPartStrings": "lib/webparts/helloWorld/loc/{locale}.js",
+    "FaqWebPartStrings": "lib/webparts/faq/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
+    "NavbarWebPartStrings": "lib/webparts/navbar/loc/{locale}.js",
+    "MenuLateralWebPartStrings": "lib/webparts/menuLateral/loc/{locale}.js",
+    "ListaNovedadesWebPartStrings": "lib/webparts/listaNovedades/loc/{locale}.js"
+  }
+}

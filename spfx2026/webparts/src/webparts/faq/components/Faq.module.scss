@@ -1,0 +1,178 @@
+.faq {
+  overflow: hidden;
+  padding: 1em;
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+}
+
+.welcome {
+  text-align: center;
+}
+
+.welcomeImage {
+  width: 100%;
+  max-width: 420px;
+}
+
+.links {
+  a {
+    text-decoration: none;
+    color: "[theme:link, default:#03787c]";
+    color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
+
+    &:hover {
+      text-decoration: underline;
+      color: "[theme:linkHovered, default: #014446]";
+      color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
+    }
+  }
+}
+
+// .container {
+//   width: 100%;
+// }
+
+// .quickLinks {
+//   display: grid;
+
+//   grid-template-columns: repeat(5, 1fr);
+
+//   width: 100%;
+//   max-width: 650px;
+// }
+
+// .quickLink {
+//   height: 125px;
+
+//   background-color: #003da5;
+
+//   color: white;
+
+//   display: flex;
+//   flex-direction: column;
+
+//   align-items: center;
+//   justify-content: center;
+
+//   text-align: center;
+
+//   cursor: pointer;
+
+//   border-right: 3px solid white;
+//   border-bottom: 3px solid white;
+
+//   box-sizing: border-box;
+
+//   transition: background-color 0.2s ease;
+// }
+
+// .quickLink:hover {
+//   background-color: #002f82;
+// }
+
+// .icon {
+//   font-size: 28px;
+
+//   margin-bottom: 12px;
+// }
+
+// .title {
+//   font-size: 14px;
+// }
+
+
+// /* Segunda fila */
+
+// .quickLink:nth-child(6) {
+//   grid-column: 1;
+// }
+
+// .quickLink:nth-child(7) {
+//   grid-column: 2;
+// }
+
+// .quickLink:nth-child(8) {
+//   grid-column: 3;
+// }
+
+// .quickLink:nth-child(9) {
+//   grid-column: 4;
+// }
+
+.container {
+  width: 100%;
+}
+
+.quickLinks {
+  /* 🔥 Cambiado de grid a flex para centrado automático */
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; 
+  
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.quickLink {
+  height: 125px;
+  /* 📐 Calculamos el tamaño para que entren exactamente 5 por fila dentro de los 650px */
+  width: calc(20% - 3px); 
+  
+  background-color: #003da5;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  
+  /* Mantener tus bordes blancos */
+  border-right: 3px solid white;
+  border-bottom: 3px solid white;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+}
+
+.quickLink:hover {
+  background-color: #002f82;
+}
+
+.icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 14px;
+}
+
+/* 🔥 ELIMINADOS TODOS LOS NTH-CHILD MANUALES */
+
+
+/* Responsive */
+
+@media screen and (max-width: 900px) {
+
+  .quickLinks {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .quickLink:nth-child(6),
+  .quickLink:nth-child(7),
+  .quickLink:nth-child(8),
+  .quickLink:nth-child(9) {
+    grid-column: auto;
+  }
+
+}
+
+
+@media screen and (max-width: 600px) {
+
+  .quickLinks {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
