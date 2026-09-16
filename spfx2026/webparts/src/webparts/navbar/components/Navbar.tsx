@@ -9,6 +9,7 @@ import { UsageService, IUserData } from './services/UsageService';
 const Navbar: React.FC<INavbarProps> = ({ sp, siteUrl, backendSiteUrl }) => {
   const [menu, setMenu] = useState<IMainNavItem[]>([]);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [searchOpen, setSearchOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -55,6 +56,7 @@ const Navbar: React.FC<INavbarProps> = ({ sp, siteUrl, backendSiteUrl }) => {
       if (navRef.current && !navRef.current.contains(evt.target as Node)) {
         setOpenIndex(null);
         setSearchOpen(false);
+        setMobileOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -70,6 +72,11 @@ const Navbar: React.FC<INavbarProps> = ({ sp, siteUrl, backendSiteUrl }) => {
 
   const toggleItem = (index: number): void => {
     setOpenIndex((current) => (current === index ? null : index));
+  };
+
+  const toggleMobile = (): void => {
+    setMobileOpen((current) => !current);
+    setOpenIndex(null);
   };
 
   // Compara la URL actual contra el link del ítem (equivalente a
@@ -126,29 +133,43 @@ const Navbar: React.FC<INavbarProps> = ({ sp, siteUrl, backendSiteUrl }) => {
   };
 
   return (
-    <div className={styles.navBar} ref={navRef}>
+    <div className={`${styles.navBar} ${mobileOpen ? styles.navBarMobileOpen : ''}`} ref={navRef}>
       <a href={siteUrl} className={styles.brand}>
         <span className={styles.brandText}>Gador</span>
       </a>
 
-      <div className={styles.navCenter}>
+      <button
+        type="button"
+        className={`${styles.hamburger} ${mobileOpen ? styles.hamburgerOpen : ''}`}
+        aria-label={mobileOpen ? 'Cerrar menú' : 'Abrir menú'}
+        aria-expanded={mobileOpen}
+        onClick={toggleMobile}
+      >
+        <span className={styles.hamburgerLine} />
+        <span className={styles.hamburgerLine} />
+        <span className={styles.hamburgerLine} />
+      </button>
+
+      <div className={`${styles.navCenter} ${mobileOpen ? styles.navCenterOpen : ''}`}>
         <ul className={styles.navList}>
         <li className={styles.navItem}>
-          <a
-            href={siteUrl}
-            className={`${styles.navLink} ${isActive(siteUrl) ? styles.navLinkActive : ''}`}
-            onClick={(evt) =>
-              handleNavClick(evt, {
-                botonId: 'inicio',
-                urlNav: siteUrl,
-                textoBoton: 'INICIO',
-                pilar: 'INICIO',
-                tipoMenu: 'Superior',
-              })
-            }
-          >
-            INICIO
-          </a>
+          <span className={styles.navLinkWrapper}>
+            <a
+              href={siteUrl}
+              className={`${styles.navLink} ${isActive(siteUrl) ? styles.navLinkActive : ''}`}
+              onClick={(evt) =>
+                handleNavClick(evt, {
+                  botonId: 'inicio',
+                  urlNav: siteUrl,
+                  textoBoton: 'INICIO',
+                  pilar: 'INICIO',
+                  tipoMenu: 'Superior',
+                })
+              }
+            >
+              INICIO
+            </a>
+          </span>
         </li>
 
         {loading && <li className={styles.navItem}>Cargando...</li>}
@@ -230,6 +251,23 @@ const Navbar: React.FC<INavbarProps> = ({ sp, siteUrl, backendSiteUrl }) => {
       </div>
 
       <div className={styles.searchArea}>
+        <button
+          type="button"
+          className={styles.searchBtn}
+          aria-label="Buscar"
+          onClick={() => {
+            if (searchOpen && searchTerm.trim()) {
+              runSearch();
+            } else {
+              setSearchOpen((prev) => !prev);
+            }
+          }}
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7" cy="7" r="5.25" stroke="white" strokeWidth="1.5" />
+            <line x1="11.1" y1="11.1" x2="15" y2="15" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
+        </button>
         {searchOpen ? (
           <input
             ref={searchInputRef}
@@ -241,23 +279,6 @@ const Navbar: React.FC<INavbarProps> = ({ sp, siteUrl, backendSiteUrl }) => {
             onKeyDown={handleSearchKeyDown}
           />
         ) : null}
-        <button
-          type="button"
-          className={styles.searchBtn}
-          aria-label="Buscar"
-          onClick={() => {
-            if (searchOpen) {
-              runSearch();
-            } else {
-              setSearchOpen(true);
-            }
-          }}
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="7" cy="7" r="5.25" stroke="white" strokeWidth="1.5" />
-            <line x1="11.1" y1="11.1" x2="15" y2="15" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
-        </button>
       </div>
     </div>
   );

@@ -35,7 +35,7 @@
   max-width: 100%;
   // Altura tipo banner: crece con el ancho de pantalla pero entre un piso y un techo,
   // así en mobile no queda enano y en 4K no queda gigante.
-  height: clamp(220px, 22vw, 420px);
+  //height: clamp(220px, 22vw, 420px);
   overflow: hidden;
 }
 

@@ -4,16 +4,30 @@ $text-color: #ffffff;
 $submenu-bg: #ffffff;
 $submenu-text: #0028a0;
 $active-line: #7ec4e4;
+$mobile-breakpoint: 768px;
 
 .navBar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   background-color: $navbar-blue;
-  padding: 0 32px;
-  height: 70px;
+  padding: 0 16px;
+  min-height: 60px;
   font-family: "Segoe UI", sans-serif;
   position: relative;
+
+  @media (min-width: $mobile-breakpoint) {
+    padding: 0 32px;
+    height: 70px;
+    flex-wrap: nowrap;
+  }
+}
+
+.navBarMobileOpen {
+  .searchArea {
+    display: none;
+  }
 }
 
 .brand {
@@ -39,61 +53,160 @@ $active-line: #7ec4e4;
   }
 
   .brandText {
-    font-size: 26px;
+    font-size: clamp(20px, 5vw, 26px);
     font-weight: 300;
     letter-spacing: 1px;
   }
 }
 
-.navCenter {
-  flex: 1;
+.hamburger {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  height: 100%;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 10px;
+
+  @media (min-width: $mobile-breakpoint) {
+    display: none;
+  }
+}
+
+.hamburgerLine {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: $text-color;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.hamburgerOpen {
+  .hamburgerLine:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburgerLine:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburgerLine:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+.navCenter {
+  display: none;
+  width: 100%;
+  height: auto;
+  background-color: $navbar-blue-hover;
+  padding: 8px 0;
+
+  @media (min-width: $mobile-breakpoint) {
+    display: flex !important;
+    flex: 1;
+    justify-content: center;
+    width: auto;
+    height: 100%;
+    background-color: transparent;
+    padding: 0;
+  }
+}
+
+.navCenterOpen {
+  display: block;
+
+  @media (min-width: $mobile-breakpoint) {
+    display: flex;
+  }
 }
 
 .navList {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
   list-style: none;
   margin: 0;
   padding: 0;
-  height: 100%;
+
+  @media (min-width: $mobile-breakpoint) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
 }
 
 .navItem {
   position: relative;
   display: flex;
-  align-items: center;
-  height: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  height: auto;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
   &.open {
     background-color: $navbar-blue-hover;
+  }
+
+  @media (min-width: $mobile-breakpoint) {
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    border-bottom: none;
   }
 }
 
 .navLinkWrapper {
   display: flex;
   align-items: center;
-  height: 100%;
-  padding: 0 22px;
+  justify-content: space-between;
+  height: auto;
+  padding: 0 16px;
 
   &:hover {
     background-color: $navbar-blue-hover;
+  }
+
+  @media (min-width: $mobile-breakpoint) {
+    justify-content: center;
+    height: 100%;
+    padding: 0 12px;
+  }
+
+  @media (min-width: 992px) {
+    padding: 0 22px;
   }
 }
 
 .navLink {
   color: $text-color;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.5px;
-  white-space: nowrap;
   text-transform: uppercase;
-  padding: 26px 0;
+  padding: 16px 0;
   position: relative;
+  width: 100%;
+  white-space: normal;
+
+  @media (min-width: $mobile-breakpoint) {
+    padding: 26px 0;
+    width: auto;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 992px) {
+    font-size: 14px;
+  }
 }
 
 .navLinkActive {
@@ -112,11 +225,19 @@ $active-line: #7ec4e4;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 12px;
   margin-left: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+
+  @media (min-width: $mobile-breakpoint) {
+    padding: 4px;
+    min-width: auto;
+    min-height: auto;
+  }
 }
 
 .arrow {
@@ -133,16 +254,25 @@ $active-line: #7ec4e4;
 }
 
 .subMenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 240px;
-  background-color: $submenu-bg;
+  position: static;
+  width: 100%;
+  min-width: auto;
+  background-color: rgba(0, 0, 0, 0.15);
   list-style: none;
   margin: 0;
-  padding: 8px 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 0;
+  box-shadow: none;
   z-index: 100;
+
+  @media (min-width: $mobile-breakpoint) {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 240px;
+    background-color: $submenu-bg;
+    padding: 8px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
 }
 
 .subMenuItem {
@@ -151,13 +281,22 @@ $active-line: #7ec4e4;
 
 .subMenuLink {
   display: block;
-  padding: 12px 20px;
-  color: $submenu-text;
+  padding: 14px 24px;
+  color: $text-color;
   text-decoration: none;
   font-size: 14px;
 
   &:hover {
-    background-color: #f0f2fa;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  @media (min-width: $mobile-breakpoint) {
+    padding: 12px 20px;
+    color: $submenu-text;
+
+    &:hover {
+      background-color: #f0f2fa;
+    }
   }
 }
 
@@ -167,6 +306,11 @@ $active-line: #7ec4e4;
   position: relative;
   height: 100%;
   flex-shrink: 0;
+  order: 2;
+
+  @media (min-width: $mobile-breakpoint) {
+    height: 100%;
+  }
 }
 
 .searchBtn {
@@ -174,10 +318,16 @@ $active-line: #7ec4e4;
   border: none;
   cursor: pointer;
   height: 100%;
-  padding: 0 18px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (min-width: 992px) {
+    padding: 0 18px;
+  }
 
   &:hover {
     background-color: $navbar-blue-hover;
@@ -186,10 +336,10 @@ $active-line: #7ec4e4;
 
 .searchInput {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 4px);
   right: 0;
-  margin-top: 4px;
   width: 260px;
+  max-width: calc(100vw - 32px);
   padding: 10px 14px;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
@@ -197,7 +347,8 @@ $active-line: #7ec4e4;
   color: $submenu-text;
   background-color: $submenu-bg;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  z-index: 100;
+  z-index: 1000;
+
 
   &:focus {
     outline: none;
