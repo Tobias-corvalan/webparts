@@ -14,6 +14,7 @@
     "solutionShortDescription": "webparts description",
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
-    "componentType": "webpart"
+    "componentType": "extension",
+    "extensionType": "ApplicationCustomizer"
   }
 }

@@ -2,5 +2,29 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/spfx-serve.schema.json",
   "port": 4321,
   "https": true,
-  "initialPage": "https://gadorlab.sharepoint.com/sites/QARRHH/GP/_layouts/workbench.aspx"
+  "initialPage": "https://gadorlab.sharepoint.com/sites/QASubsidiarias/_layouts/workbench.aspx",
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://gadorlab.sharepoint.com/sites/QASubsidiarias/SitePages/PruebasSPFX.aspx",
+      "customActions": {
+        "0361b3b7-f00c-40b5-8277-0a18ab055cf4": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
+    },
+    "footer": {
+      "pageUrl": "https://gadorlab.sharepoint.com/sites/QASubsidiarias/SitePages/PruebasSPFX.aspx",
+      "customActions": {
+        "0361b3b7-f00c-40b5-8277-0a18ab055cf4": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
+    }
+  }
 }

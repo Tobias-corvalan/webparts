@@ -1,4 +1,4 @@
-const spfxProfile = require('@microsoft/eslint-config-spfx/lib/flat-profiles/react');
+const spfxProfile = require('@microsoft/eslint-config-spfx/lib/flat-profiles/default');
 
 module.exports = [
   ...spfxProfile,

@@ -75,7 +75,7 @@
   height: 100%;
   // "contain" muestra la imagen COMPLETA sin recortar ningún borde,
   // el espacio sobrante queda cubierto por .slideBg en vez de quedar en blanco.
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
 }
 
@@ -114,7 +114,7 @@
   color: white;
   box-sizing: border-box;
   // Ancho del bloque de texto: nunca menos de 220px (mobile) ni más de 600px (desktop)
-  max-width: clamp(220px, 45vw, 600px);
+  max-width: min(600px, 45%);
 }
 .content h2 {
   margin: 0 0 12px 0;

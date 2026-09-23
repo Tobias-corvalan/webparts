@@ -1,0 +1,93 @@
+$footer-blue: #a9d8f0;
+$scroll-btn-blue: #1c2f9e;
+
+.footerWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.scrollTopBtn {
+  position: absolute;
+  top: -40px;
+  right: 24px;
+  z-index: 500;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background-color: $scroll-btn-blue;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($scroll-btn-blue, 8%);
+  }
+}
+
+.footerBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  box-sizing: border-box;
+  padding: 18px 24px;
+
+  background-color: $footer-blue;
+
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.copyright {
+  color: white;
+  font-size: 13px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.logoIcon {
+  display: flex;
+  align-items: center;
+}
+
+.logoImg {
+  height: 22px;
+  width: auto;
+}
+
+.brandText {
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Segoe UI", sans-serif;
+}
+
+// En mobile, el botón de volver arriba pasa a fijo en la esquina de la
+// pantalla en vez de "flotar" pegado al footer, para que siempre sea
+// alcanzable con el pulgar sin importar cuánto scrolleaste.
+@media (max-width: 600px) {
+  .scrollTopBtn {
+    position: fixed;
+    top: auto;
+    bottom: 16px;
+    right: 16px;
+    z-index: 500;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  }
+
+  .footerBar {
+    justify-content: center;
+    text-align: center;
+  }
+}

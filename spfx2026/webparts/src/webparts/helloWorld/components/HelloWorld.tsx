@@ -207,7 +207,7 @@ useEffect(() => {
             />
 
             {/* Sombreado */}
-            {slide.SinSombreado && (<>
+            {!slide.SinSombreado && (<>
               <div className={styles.overlay}></div>
                 {/* Contenido */}
               <div className={styles.content}>

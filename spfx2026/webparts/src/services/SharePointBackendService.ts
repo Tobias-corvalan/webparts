@@ -75,6 +75,44 @@ export class SharePointBackendService {
       return data.value;
     }
 
+     /**
+   * Obtiene las listas visibles del sitio backend.
+   */
+  public static async getLists(
+    spHttpClient: SPHttpClient,
+    backendSiteUrl: string
+  ): Promise<any[]> {
+
+    const uri =
+      `${backendSiteUrl}/_api/web/lists` +
+      `?$select=Id,Title,Hidden` +
+      `&$filter=Hidden eq false` +
+      `&$orderby=Title`;
+
+    console.log('URL BACKEND LISTAS:', uri);
+
+    const response = await spHttpClient.get(
+      uri,
+      SPHttpClient.configurations.v1,
+      {
+        headers: {
+          Accept: 'application/json;odata=nometadata'
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Error HTTP ${response.status}: ${response.statusText} (${uri})`
+      );
+    }
+
+    const data = await response.json();
+
+    return data.value;
+  }
+
+
 
 
 }
