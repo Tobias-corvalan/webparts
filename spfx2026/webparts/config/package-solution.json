@@ -1,9 +1,9 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "webparts-client-side-solution",
-    "id": "11a15b80-2ae1-47c0-9aac-d86955190dbf",
-    "version": "1.0.0.0",
+    "name": "gador-webparts",
+    "id": "13326c61-3c3f-4748-9a68-d49941c9b0ef",
+    "version": "1.0.0.3",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
@@ -29,12 +29,12 @@
       {
         "title": "webparts Feature",
         "description": "The feature that activates elements of the webparts solution.",
-        "id": "e236033d-19ca-49e2-a2ef-780b14e7e72d",
+        "id": "78eb2ec9-91d5-43bf-8243-4e18587e8fa4",
         "version": "1.0.0.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/webparts.sppkg"
+    "zippedPackage": "solution/Gador.componentes.sppkg"
   }
 }

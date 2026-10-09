@@ -129,8 +129,7 @@ const ListaNovedades: React.FC<IListaNovedadesProps> = (props) => {
      OBTENER NOVEDADES
   ===================================================== */
 
-  const getInformacionGeneralItems =
-    async (): Promise<void> => {
+  async function getInformacionGeneralItems(): Promise<void> {
 
       setError(null);
       setElementos([]);
@@ -478,7 +477,7 @@ const ListaNovedades: React.FC<IListaNovedadesProps> = (props) => {
      MOVER HACIA ABAJO
   ===================================================== */
 
-  const moverSiguiente = (): void => {
+  function moverSiguiente(): void {
 
     /*
      * Si ya estamos animando,
@@ -774,9 +773,7 @@ const ListaNovedades: React.FC<IListaNovedadesProps> = (props) => {
      DÍAS DESDE MODIFICACIÓN
   ===================================================== */
 
-  const diasDesdeModificacion = (
-    fecha: string
-  ): number => {
+  function diasDesdeModificacion(fecha: string): number {
 
     const ahora =
       new Date().getTime();

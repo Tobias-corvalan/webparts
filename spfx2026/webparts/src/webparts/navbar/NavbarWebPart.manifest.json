@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "fe0394ee-d457-4fd5-b3bb-90f734d214db",
+  "id": "e0f4c8d5-687c-4a3b-b4ef-2f55abcdfa57",
   "alias": "NavbarWebPart",
   "componentType": "WebPart",
   "supportsFullBleed": true,

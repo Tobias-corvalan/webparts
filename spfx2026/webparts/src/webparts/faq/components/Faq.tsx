@@ -169,10 +169,30 @@ if (isMounted) {
             }}
           >
 
-            <Icon
-              iconName={link.NombreIcono}
-              className={styles.icon}
-            />
+            {/\.(png|svg|jpe?g|gif|webp)$/i.test(
+                (link.NombreIcono || '').trim()
+              ) ? (
+                <img
+                  src={
+                    'https://digitalm365stk.sharepoint.com/sites/PnPModernSearchTest/' +
+                    'PublishingImages/Iconos%20Recuadro/' +
+                    encodeURIComponent(link.NombreIcono.trim())
+                  }
+                  className={styles.imageIcon}
+                  alt=""
+                />
+              ) : link.ClaseImagen ? (
+                <i
+                  className={styles.legacyIcon}
+                  data-icon={link.ClaseImagen.trim()}
+                  aria-hidden="true"
+                />
+              ) : (
+                <Icon
+                  iconName={(link.NombreIcono || '').trim()}
+                  className={styles.icon}
+                />
+              )}
 
             <span className={styles.title}>
               {link.Title}

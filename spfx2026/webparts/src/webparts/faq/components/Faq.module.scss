@@ -173,3 +173,61 @@
     font-size: 13px;
   }
 }
+
+@font-face {
+  font-family: 'GadorFaqIcons';
+  src: url('https://digitalm365stk.sharepoint.com/sites/PnPModernSearchTest/SiteAssets/fabric-icons.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.legacyIcon {
+  font-family: 'GadorFaqIcons';
+  font-size: 34px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 12px;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  &[data-icon='Colaboradores']::before {
+    content: '\E902';
+  }
+
+  &[data-icon='Servicios']::before {
+    content: '\E9D5';
+  }
+
+  &[data-icon='Beneficios']::before {
+    content: '\E728';
+  }
+
+  &[data-icon='Medicamentos']::before {
+    content: '\EACB';
+  }
+
+  &[data-icon='Rse']::before {
+    content: '\E913';
+  }
+
+  &[data-icon='Consultas']::before {
+    content: '\F70F';
+  }
+
+  &[data-icon='Accesos']::before {
+    content: '\F6E3';
+  }
+}
+
+.imageIcon {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  margin-bottom: 12px;
+  display: block;
+}
