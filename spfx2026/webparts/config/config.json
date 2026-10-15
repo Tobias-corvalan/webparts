@@ -57,6 +57,14 @@
           "manifest": "./src/extensions/footer/FooterApplicationCustomizer.manifest.json"
         }
       ]
+    },
+    "tabla-doc-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/tablaDoc/TablaDocWebPart.js",
+          "manifest": "./src/webparts/tablaDoc/TablaDocWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -68,6 +76,7 @@
     "MenuLateralWebPartStrings": "lib/webparts/menuLateral/loc/{locale}.js",
     "ListaNovedadesWebPartStrings": "lib/webparts/listaNovedades/loc/{locale}.js",
     "OrganigramaWebPartStrings": "lib/webparts/organigrama/loc/{locale}.js",
-    "FooterApplicationCustomizerStrings": "lib/extensions/footer/loc/{locale}.js"
+    "FooterApplicationCustomizerStrings": "lib/extensions/footer/loc/{locale}.js",
+    "TablaDocWebPartStrings": "lib/webparts/tablaDoc/loc/{locale}.js"
   }
 }
