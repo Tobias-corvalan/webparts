@@ -1,0 +1,84 @@
+.tablaDocContainer {
+  font-family: "Avenir Next Demi", Arial, sans-serif;
+  padding: 0;
+}
+
+.title {
+  display: inline-block;
+  background: #0033A0;
+  color: white;
+  padding: 8px 16px;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.titleWrapper {
+  border-bottom: 4px solid #0033A0;
+  margin-bottom: 15px;
+}
+
+.activity {
+  padding: 12px 15px;
+  margin-bottom: 0;
+
+  &:nth-child(odd) {
+    background: #C6E3F3;
+  }
+
+  &:nth-child(even) {
+    background: white;
+  }
+}
+
+.activityHeader {
+  color: #0033A0;
+  font-weight: bold;
+  font-size: 15px;
+  margin: 0 0 8px 0;
+}
+
+.activityFiles {
+  padding-left: 18px;
+
+  ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  li {
+    margin: 4px 0;
+    line-height: 1.4;
+  }
+
+  a {
+    color: #0033A0;
+    text-decoration: none;
+    font-size: 14px;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 18px;
+    padding: 8px 12px;
+  }
+
+  .activityHeader {
+    font-size: 14px;
+  }
+
+  .activityFiles {
+    padding-left: 12px;
+
+    a {
+      font-size: 13px;
+    }
+  }
+}

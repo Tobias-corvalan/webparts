@@ -65,6 +65,14 @@
           "manifest": "./src/webparts/tablaDoc/TablaDocWebPart.manifest.json"
         }
       ]
+    },
+    "tabla-links-web-part-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/tablaLinksWebPart/TablaLinksWebPartWebPart.js",
+          "manifest": "./src/webparts/tablaLinksWebPart/TablaLinksWebPartWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -77,6 +85,7 @@
     "ListaNovedadesWebPartStrings": "lib/webparts/listaNovedades/loc/{locale}.js",
     "OrganigramaWebPartStrings": "lib/webparts/organigrama/loc/{locale}.js",
     "FooterApplicationCustomizerStrings": "lib/extensions/footer/loc/{locale}.js",
-    "TablaDocWebPartStrings": "lib/webparts/tablaDoc/loc/{locale}.js"
+    "TablaDocWebPartStrings": "lib/webparts/tablaDoc/loc/{locale}.js",
+    "TablaLinksWebPartWebPartStrings": "lib/webparts/tablaLinksWebPart/loc/{locale}.js"
   }
 }

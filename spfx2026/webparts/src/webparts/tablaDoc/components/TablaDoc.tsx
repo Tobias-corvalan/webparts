@@ -1,44 +1,125 @@
-import * as React from 'react';
-import styles from './TablaDoc.module.scss';
-import type { ITablaDocProps } from './ITablaDocProps';
-import { escape } from '@microsoft/sp-lodash-subset';
-import welcomeDark from '../assets/welcome-dark.png';
-import welcomeLight from '../assets/welcome-light.png';
+import * as React from "react";
+import styles from "./TablaDoc.module.scss";
+import { ITablaDocProps } from "./ITablaDocProps";
+import { TablaDocService, IGrupo, ModoVisualizacion } from "../services/TablaDocService";
 
-export default class TablaDoc extends React.Component<ITablaDocProps> {
+interface IState {
+  grupos: IGrupo[];
+  cargando: boolean;
+  error: string;
+}
+
+export default class TablaDoc extends React.Component<ITablaDocProps, IState> {
+  constructor(props: ITablaDocProps) {
+    super(props);
+    this.state = {
+      grupos: [],
+      cargando: true,
+      error: ""
+    };
+  }
+
+  public componentDidMount(): void {
+    this.cargar();
+  }
+
+  public componentDidUpdate(prevProps: ITablaDocProps): void {
+    const siteUrl = this.props.backendSiteUrl || this.props.siteUrl;
+    const biblioteca = this.props.biblioteca || "Documentos";
+    const modo = this.props.modo || "automatico";
+    const prevSiteUrl = prevProps.backendSiteUrl || prevProps.siteUrl;
+    const prevBiblioteca = prevProps.biblioteca || "Documentos";
+    const prevModo = prevProps.modo || "automatico";
+
+    if (siteUrl !== prevSiteUrl || biblioteca !== prevBiblioteca || modo !== prevModo) {
+      this.setState({ cargando: true, error: "", grupos: [] }, () => {
+        this.cargar();
+      });
+    }
+  }
+
+  private async cargar(): Promise<void> {
+    const siteUrl = this.props.backendSiteUrl || this.props.siteUrl;
+    const biblioteca = this.props.biblioteca || "Documentos";
+    const modo = this.props.modo || "automatico";
+    const service = new TablaDocService(
+      this.props.spHttpClient,
+      siteUrl,
+      biblioteca,
+      modo as ModoVisualizacion
+    );
+
+    try {
+      const grupos = await service.getGrupos();
+      this.setState({ grupos, cargando: false });
+    } catch (err) {
+      this.setState({
+        error: "Error al recuperar la información.",
+        cargando: false
+      });
+      console.error(err);
+    }
+  }
+
   public render(): React.ReactElement<ITablaDocProps> {
-    const {
-      description,
-      isDarkTheme,
-      environmentMessage,
-      userDisplayName
-    } = this.props;
+    const { grupos, cargando, error } = this.state;
+    const { description } = this.props;
 
     return (
-      <section className={`${styles.tablaDoc}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? welcomeDark : welcomeLight} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
+      <div className={styles.tablaDocContainer}>
+        <div className={styles.titleWrapper}>
+          <div className={styles.title}>{description}</div>
         </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It&#39;s the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank" rel="noreferrer">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank" rel="noreferrer">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank" rel="noreferrer">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank" rel="noreferrer">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank" rel="noreferrer">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank" rel="noreferrer">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank" rel="noreferrer">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
-      </section>
+
+        {cargando && (
+          <div className={styles.activity}>
+            <div className={styles.activityHeader}>Cargando...</div>
+          </div>
+        )}
+
+        {error && (
+          <div className={styles.activity}>
+            <div className={styles.activityHeader}>{error}</div>
+          </div>
+        )}
+
+        {!cargando && !error && grupos.length === 0 && (
+          <div className={styles.activity}>
+            <div className={styles.activityHeader}>
+              No se encontraron documentos vigentes.
+            </div>
+          </div>
+        )}
+
+        {grupos.map((grupo, index) => (
+          <div
+            key={`${grupo.carpeta}-${index}`}
+            className={styles.activity}
+          >
+            <div className={styles.activityHeader}>{grupo.carpeta}</div>
+            {grupo.archivos.length > 0 && (
+              <div className={styles.activityFiles}>
+                <ul>
+                  {grupo.archivos.map((archivo, idx) => {
+                    const nombreMostrar = archivo.nombre.replace(/\.[^/.]+$/, "");
+                    return (
+                      <li key={`${archivo.url}-${idx}`}>
+                        <a
+                          href={archivo.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          • {nombreMostrar}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     );
   }
 }

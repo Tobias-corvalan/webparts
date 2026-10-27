@@ -1,29 +1,84 @@
-.tablaDoc {
-  overflow: hidden;
-  padding: 1em;
-  color: "[theme:bodyText, default: #323130]";
-  color: var(--bodyText);
+.tablaDocContainer {
+  font-family: "Avenir Next Demi", Arial, sans-serif;
+  padding: 0;
 }
 
-.welcome {
-  text-align: center;
+.title {
+  display: inline-block;
+  background: #0033A0;
+  color: white;
+  padding: 8px 16px;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
 }
 
-.welcomeImage {
-  width: 100%;
-  max-width: 420px;
+.titleWrapper {
+  border-bottom: 4px solid #0033A0;
+  margin-bottom: 15px;
 }
 
-.links {
+.activity {
+  padding: 12px 15px;
+  margin-bottom: 0;
+
+  &:nth-child(odd) {
+    background: #C6E3F3;
+  }
+
+  &:nth-child(even) {
+    background: white;
+  }
+}
+
+.activityHeader {
+  color: #0033A0;
+  font-weight: bold;
+  font-size: 15px;
+  margin: 0 0 8px 0;
+}
+
+.activityFiles {
+  padding-left: 18px;
+
+  ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  li {
+    margin: 4px 0;
+    line-height: 1.4;
+  }
+
   a {
+    color: #0033A0;
     text-decoration: none;
-    color: "[theme:link, default:#03787c]";
-    color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
+    font-size: 14px;
 
     &:hover {
       text-decoration: underline;
-      color: "[theme:linkHovered, default: #014446]";
-      color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
+      cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 18px;
+    padding: 8px 12px;
+  }
+
+  .activityHeader {
+    font-size: 14px;
+  }
+
+  .activityFiles {
+    padding-left: 12px;
+
+    a {
+      font-size: 13px;
     }
   }
 }

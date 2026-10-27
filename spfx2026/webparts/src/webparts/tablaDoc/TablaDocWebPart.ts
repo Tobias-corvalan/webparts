@@ -3,10 +3,14 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneDropdown
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-import { IReadonlyTheme } from '@microsoft/sp-component-base';
+import {
+  PropertyFieldListPicker,
+  PropertyFieldListPickerOrderBy
+} from '@pnp/spfx-property-controls/lib/PropertyFieldListPicker';
 
 import * as strings from 'TablaDocWebPartStrings';
 import TablaDoc from './components/TablaDoc';
@@ -14,78 +18,27 @@ import { ITablaDocProps } from './components/ITablaDocProps';
 
 export interface ITablaDocWebPartProps {
   description: string;
+  backendSiteUrl: string;
+  biblioteca: string;
+  modo: "automatico" | "metadatos" | "carpetas" | "archivos";
 }
 
 export default class TablaDocWebPart extends BaseClientSideWebPart<ITablaDocWebPartProps> {
-
-  private _isDarkTheme: boolean = false;
-  private _environmentMessage: string = '';
 
   public render(): void {
     const element: React.ReactElement<ITablaDocProps> = React.createElement(
       TablaDoc,
       {
         description: this.properties.description,
-        isDarkTheme: this._isDarkTheme,
-        environmentMessage: this._environmentMessage,
-        userDisplayName: this.context.pageContext.user.displayName
+        spHttpClient: this.context.spHttpClient,
+        siteUrl: this.context.pageContext.web.absoluteUrl,
+        backendSiteUrl: this.properties.backendSiteUrl,
+        biblioteca: this.properties.biblioteca,
+        modo: this.properties.modo || "automatico"
       }
     );
 
     ReactDom.render(element, this.domElement);
-  }
-
-  protected onInit(): Promise<void> {
-    return this._getEnvironmentMessage().then(message => {
-      this._environmentMessage = message;
-    });
-  }
-
-
-
-  private _getEnvironmentMessage(): Promise<string> {
-    if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
-      return this.context.sdks.microsoftTeams.teamsJs.app.getContext()
-        .then(context => {
-          let environmentMessage: string = '';
-          switch (context.app.host.name) {
-            case 'Office': // running in Office
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOffice : strings.AppOfficeEnvironment;
-              break;
-            case 'Outlook': // running in Outlook
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
-              break;
-            case 'Teams': // running in Teams
-            case 'TeamsModern':
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
-              break;
-            default:
-              environmentMessage = strings.UnknownEnvironment;
-          }
-
-          return environmentMessage;
-        });
-    }
-
-    return Promise.resolve(this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment);
-  }
-
-  protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
-    if (!currentTheme) {
-      return;
-    }
-
-    this._isDarkTheme = !!currentTheme.isInverted;
-    const {
-      semanticColors
-    } = currentTheme;
-
-    if (semanticColors) {
-      this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
-      this.domElement.style.setProperty('--link', semanticColors.link || null);
-      this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
-    }
-
   }
 
   protected onDispose(): void {
@@ -97,6 +50,8 @@ export default class TablaDocWebPart extends BaseClientSideWebPart<ITablaDocWebP
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+    const siteUrl = this.properties.backendSiteUrl || this.context.pageContext.web.absoluteUrl;
+
     return {
       pages: [
         {
@@ -109,6 +64,33 @@ export default class TablaDocWebPart extends BaseClientSideWebPart<ITablaDocWebP
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
+                }),
+                PropertyPaneTextField('backendSiteUrl', {
+                  label: strings.BackendSiteUrlFieldLabel
+                }),
+                PropertyFieldListPicker('biblioteca', {
+                  label: strings.BibliotecaFieldLabel,
+                  selectedList: this.properties.biblioteca,
+                  includeHidden: false,
+                  orderBy: PropertyFieldListPickerOrderBy.Title,
+                  disabled: false,
+                  baseTemplate: 101,
+                  webAbsoluteUrl: siteUrl,
+                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+                  properties: this.properties,
+                  context: this.context as any,
+                  onGetErrorMessage: undefined,
+                  deferredValidationTime: 0,
+                  key: 'tablaDocListPickerFieldId'
+                }),
+                PropertyPaneDropdown('modo', {
+                  label: strings.ModoFieldLabel,
+                  options: [
+                    { key: 'automatico', text: strings.ModoAutomatico },
+                    { key: 'metadatos', text: strings.ModoMetadatos },
+                    { key: 'carpetas', text: strings.ModoCarpetas },
+                    { key: 'archivos', text: strings.ModoArchivos }
+                  ]
                 })
               ]
             }

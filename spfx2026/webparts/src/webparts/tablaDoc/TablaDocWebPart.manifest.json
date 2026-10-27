@@ -19,10 +19,10 @@
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
     "group": { "default": "Advanced" },
     "title": { "default": "TablaDoc" },
-    "description": { "default": "TablaDoc description" },
+    "description": { "default": "Muestra documentos agrupados por carpeta desde la biblioteca Documentos" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "TablaDoc"
+      "description": "Actividades de Farmacovigilancia"
     }
   }]
 }

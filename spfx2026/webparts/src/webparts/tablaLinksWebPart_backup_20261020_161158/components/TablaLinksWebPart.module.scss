@@ -1,0 +1,130 @@
+.tablaLinksContainer {
+  font-family: "Avenir Next Demi", Arial, sans-serif;
+  padding: 0;
+}
+
+.tituloWrapper {
+  border-bottom: 4px solid #0033A0;
+  margin-bottom: 0;
+}
+
+.titulo {
+  display: inline-block;
+  background: #0033A0;
+  color: white;
+  padding: 8px 16px;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.seccion {
+  margin-bottom: 20px;
+}
+
+.tabla {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.row {
+  display: table-row;
+  width: 100%;
+}
+
+.rowPar {
+  background: #C6E3F3;
+}
+
+.rowImpar {
+  background: white;
+}
+
+.tablaTematica .row {
+  background: white;
+}
+
+.cellTitulo {
+  display: table-cell;
+  padding: 12px 15px;
+  color: #0033A0;
+  font-weight: normal;
+  font-size: 15px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.tablaTematica .cellTitulo {
+  font-weight: normal;
+}
+
+.cellAccion {
+  display: table-cell;
+  padding: 12px 15px;
+  text-align: right;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.botonVerMas {
+  display: inline-block;
+  background: #0033A0;
+  color: white;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 4px;
+
+  &:hover {
+    background: #002266;
+    text-decoration: none;
+  }
+}
+
+.tablaTematica {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.grupoTematica {
+  display: table-row-group;
+}
+
+.subtituloTematica {
+  color: #0033A0;
+  font-weight: bold;
+  font-size: 17px;
+  padding: 18px 15px 8px 15px;
+  margin: 0;
+  background: white;
+  border-bottom: 2px solid #0033A0;
+}
+
+@media (max-width: 768px) {
+  .titulo {
+    font-size: 18px;
+    padding: 8px 12px;
+  }
+
+  .cellTitulo {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .cellAccion {
+    padding: 10px 12px;
+  }
+
+  .botonVerMas {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .subtituloTematica {
+    font-size: 15px;
+    padding: 14px 12px 6px 12px;
+  }
+}

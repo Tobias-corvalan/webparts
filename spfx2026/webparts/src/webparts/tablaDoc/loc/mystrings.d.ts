@@ -2,6 +2,13 @@ declare interface ITablaDocWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
   DescriptionFieldLabel: string;
+  BackendSiteUrlFieldLabel: string;
+  BibliotecaFieldLabel: string;
+  ModoFieldLabel: string;
+  ModoAutomatico: string;
+  ModoMetadatos: string;
+  ModoCarpetas: string;
+  ModoArchivos: string;
   AppLocalEnvironmentSharePoint: string;
   AppLocalEnvironmentTeams: string;
   AppLocalEnvironmentOffice: string;
